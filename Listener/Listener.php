@@ -32,8 +32,8 @@ class Listener
         $request = $request->getRequest();
         $session = $request->getSession();
 
-        if ($session) {
-            $locales[] = $session->getLocale();
+        if ($request) {
+            $locales[] = $request->getLocale();
         }
 
         if ($request->server->has('HTTP_ACCEPT_LANGUAGE')) {
@@ -42,8 +42,8 @@ class Listener
 
         foreach ($locales as $locale) {
             if (!empty($locale)) {
-                if ($session) {
-                    $session->setLocale($locale);
+                if ($request) {
+                    $request->setLocale($locale);
                 }
                 \Locale::setDefault($locale);
                 break;
